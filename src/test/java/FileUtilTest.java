@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package handler;
 
-import com.sun.net.httpserver.HttpExchange;
+import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author chlupnoha
  */
-public class RequestHandlerTest {
+public class FileUtilTest {
     
-    public RequestHandlerTest() {
+    public FileUtilTest() {
     }
     
     @BeforeClass
@@ -39,16 +38,19 @@ public class RequestHandlerTest {
     }
 
     /**
-     * Test of handle method, of class RequestHandler.
+     * Test of createFolder method, of class FileUtil.
      */
     @Test
-    public void testHandle() throws Exception {
-        System.out.println("handle");
-        HttpExchange t = null;
-        RequestHandler instance = new RequestHandler();
-        instance.handle(t);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testCreateFolder() {
+        System.out.println("createFolder");
+        String name = "testFolder";
+        //create
+        FileUtil.createFolder(name);
+        File theDir = new File(name);
+        assertTrue(theDir.exists());
+        //clear
+        theDir.delete();
+        assertTrue(!theDir.exists());
     }
     
 }
