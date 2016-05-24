@@ -48,10 +48,10 @@ public class SimpleHTTPServer {
 //                            }
                             //HttpServletRequest r = new HttpServletRequest();
 
-                            HttpParser parser = new HttpParser(socket.getInputStream());
-                            parser.parseRequest();
-                            System.out.println(parser.getMethod());
-                            System.out.println(parser.getHeaders());
+                            //HttpParser parser = new HttpParser(socket.getInputStream());
+                            SimpleHeaderParser parser = new SimpleHeaderParser(socket.getInputStream());
+                            //System.out.println();
+                            
                             System.out.println("---HEADER---");
 
                             //ZPRACOVANI HEADERU
