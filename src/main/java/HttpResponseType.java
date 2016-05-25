@@ -10,7 +10,7 @@
  */
 public enum HttpResponseType {
     _200_OK("200 OK"),
-    _401_UNAUTHRORIZED("401 Unauthorized Access"),
+    _401_UNAUTHRORIZED("401 Authorization Required"),
     _404_NOT_FOUND("404 Not Found"),
     _415_UNSUPPORTED_MEDIA_TYPE("415 Unsupported Media Type");
 

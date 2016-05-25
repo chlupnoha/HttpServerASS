@@ -62,7 +62,7 @@ public class SimpleRequestParser {
                     url = e[1];
                     break;
                 case "Authorization:":
-                    authorization = e[1];
+                    authorization = line.replace("Authorization: ", "");
                     break;
                 case "Content-Length:":
                     length = Integer.parseInt(e[1]);
