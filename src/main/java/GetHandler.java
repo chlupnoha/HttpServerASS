@@ -23,9 +23,7 @@ public class GetHandler extends AbstractHttpHandler implements Handler {
         try {
             File file = new File(route);
             String folder = file.getParentFile().getPath();
-            System.out.println(folder);
-            System.out.println(FileUtil.checkHtaccess(folder));
-
+            
             if (FileUtil.checkHtaccess(folder)
                     && !checkAuthorizationBase64(folder, httpRequest.getSimpleRequestParser().getAuthorization())) {
                 sendResponse(HttpResponseType._401_UNAUTHRORIZED, httpRequest);
@@ -40,7 +38,7 @@ public class GetHandler extends AbstractHttpHandler implements Handler {
             fis.close();
 
             sendResponse(HttpResponseType._200_OK, data, contentType, httpRequest);
-            Logger.getLogger(GetHandler.class.getName()).log(Level.INFO, "Odpoved 200 odeslana, content: {0}", new Object[]{new String(data, StandardCharsets.UTF_8)});
+            Logger.getLogger(GetHandler.class.getName()).log(Level.INFO, "Odpoved 200 odeslana, route: {0}", folder);
         } catch (FileNotFoundException ex) {
             sendResponse(HttpResponseType._404_NOT_FOUND, httpRequest);
             Logger.getLogger(GetHandler.class.getName()).log(Level.SEVERE, "File nenalezen");

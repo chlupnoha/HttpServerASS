@@ -30,6 +30,34 @@ public class FileUtil {
         }
     }
 
+    public static void createTxtFile(String pathToFolder, String name) throws FileNotFoundException, UnsupportedEncodingException, Exception {
+        String pathToFile = pathToFolder + "/" + name;
+        System.out.println("path: " + pathToFile);
+        File f = new File(pathToFile);
+        if (f.exists() && !f.isDirectory()) {
+            throw new Exception("File exist");
+        }
+
+        PrintWriter writer = new PrintWriter(pathToFile, "UTF-8");
+        writer.println("content");
+        writer.close();
+    }
+
+    public static void deleteFile(String pathToFolder, String name) throws FileNotFoundException, UnsupportedEncodingException, Exception {
+        String pathToFile = pathToFolder + "/" + name;
+        System.out.println("path: " + pathToFile);
+        File file = new File(pathToFile);
+
+        if (!file.exists() || file.isDirectory()) {
+            System.out.println("soubor neexistuje");
+            throw new Exception("File dont exist or is a directory");
+        }
+        boolean res = file.delete();
+        if (!res) {
+            throw new Exception("file cant be deleted");
+        }
+    }
+
     //create htacess
     public static void createAuthorizationHtaccess(String pathToFolder, String user, String password) throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter(pathToFolder + "/.htaccess", "UTF-8");
@@ -37,7 +65,6 @@ public class FileUtil {
         System.out.println(encodedPassword);
         writer.println(user + ":" + encodedPassword);
         writer.close();
-
     }
 
     public static boolean checkHtaccess(String folder) {

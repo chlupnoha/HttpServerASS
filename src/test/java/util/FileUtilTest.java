@@ -15,6 +15,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -82,6 +85,34 @@ public class FileUtilTest {
     public void testCheckHtaccess() {
         assertTrue(FileUtil.checkHtaccess("www/secret"));
         assertFalse(FileUtil.checkHtaccess("www"));
+    }
+
+    /**
+     * Test of createTxtFile method, of class FileUtil.
+     */
+    @Test
+    public void testCreateTxtFileAndDelete() {
+        try {
+            FileUtil.createTxtFile("www", "try.txt");
+            assertTrue(true);
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println(ex.getMessage());
+            assertTrue(false);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            assertTrue(false);
+        }
+
+        try {
+            FileUtil.deleteFile("www", "try.txt");
+            assertTrue(true);
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println(ex.getMessage());
+            assertTrue(false);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            assertTrue(false);
+        }
     }
 
 }

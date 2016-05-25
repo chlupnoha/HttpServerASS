@@ -56,6 +56,10 @@ public abstract class AbstractHttpHandler {
         Logger.getLogger(GetHandler.class.getName()).log(Level.INFO, "Htacces data: {0}", line);
         Logger.getLogger(GetHandler.class.getName()).log(Level.INFO, "Authorization data(base64): {0}", authorization);
         br.close();
+        
+        if(authorization == null){
+            return false;
+        }
 
         String decodedUserPass;
         try {

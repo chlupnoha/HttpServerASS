@@ -31,7 +31,7 @@ public class SimpleHTTPServer {
         FileUtil.createFolder(WWW_DIR);
 
         //Create Thread poll
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1; i++) {
             Thread thread = new Thread() {
                 @Override
                 public void run() {
