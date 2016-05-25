@@ -8,12 +8,13 @@ import java.io.InputStreamReader;
  *
  * @author chlupnoha
  */
-public class SimpleHeaderParser {
+public class SimpleRequestParser {
 
     private String method;
     private String authorization;
     private String route;
     private String url;
+    private String body = "";
 
     private final BufferedReader reader;
 
@@ -32,20 +33,26 @@ public class SimpleHeaderParser {
     public String getRoute() {
         return route;
     }
-        
-    public SimpleHeaderParser(InputStream is) throws IOException {
-        reader = new BufferedReader(new InputStreamReader(is));
+
+    public String getBody() {
+        return body;
+    }
+
+    public SimpleRequestParser(InputStream is) throws IOException {
+        reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
         parseRequest();
     }
 
     private void parseRequest() throws IOException {
         boolean firstLine = true;
-        String line;
-        while ((line = reader.readLine()) != null) {
+        int length = 0;
+
+        String line = reader.readLine();
+        while (line != null && line.length() > 0) {
             String[] e = line.split(" ");
-            if(firstLine){
+            if (firstLine) {
                 method = e[0];
-                if(e.length == 3){
+                if (e.length == 3) {
                     route = e[1];
                 }
                 firstLine = false;
@@ -57,6 +64,20 @@ public class SimpleHeaderParser {
                 case "Authorization:":
                     authorization = e[1];
                     break;
+                case "Content-Length:":
+                    length = Integer.parseInt(e[1]);
+                    break;
+            }
+            line = reader.readLine();
+        }
+        
+        if (length > 0) {
+            int ch;
+            while ((ch = reader.read()) != -1) {
+                body += ((char) ch);
+                if (body.length() == length) {
+                    break;
+                }
             }
         }
         //reader.close();

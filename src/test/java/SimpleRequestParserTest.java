@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,30 +18,33 @@ import static org.junit.Assert.*;
  *
  * @author chlupnoha
  */
-public class SimpleHeaderParserTest {
+public class SimpleRequestParserTest {
 
-    private static SimpleHeaderParser parse;
-
-    public SimpleHeaderParserTest() throws IOException {
+    private static SimpleRequestParser parse;
+    
+    public SimpleRequestParserTest() {
     }
-
     @BeforeClass
-    public static void setUpClass() throws IOException{
-        String headerSample = "GET /route HTTP/1.1\n"
+    public static void setUpClass() throws IOException {
+        String headerSample = "PUT /route HTTP/1.1\n"
                 + "Host: localhost:8080\n"
                 + "Connection: keep-alive\n"
+                + "Content-Length: 20\n"
                 + "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/49.0.2623.108 Chrome/49.0.2623.108 Safari/537.36\n"
                 + "Cache-Control: no-cache\n"
-                + "Authorization: pass\n"
-                + "token: ok2ffe9qubnk9dpmxgju5jlupmp6poijrxcw9zh99ttvsr5x7u\n"
-                + "Postman-Token: e6197af4-e72b-ffe5-9fb6-cb0abb14b801\n"
+                + "Origin: chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop\n"
+                + "test: test\n"
+                + "Content-Type: text/plain;charset=UTF-8\n"
+                + "Authorization: test\n"
+                + "Postman-Token: 8c98aa4f-0ce4-8958-ae79-76727aa57113\n"
                 + "Accept: */*\n"
                 + "Accept-Encoding: gzip, deflate, sdch\n"
                 + "Accept-Language: cs-CZ,cs;q=0.8,en;q=0.6\n"
-                + "Cookie: nette-browser=moif77badm; PHPSESSID=q6eo38pj0krd1neccnmn3pd4v4";
+                + "Cookie: nette-browser=moif77badm; PHPSESSID=q6eo38pj0krd1neccnmn3pd4v4\r\n\r\n" 
+                + "tady pak hrozne body\n";
 
         InputStream is = new ByteArrayInputStream(headerSample.getBytes());
-        parse = new SimpleHeaderParser(is);
+        parse = new SimpleRequestParser(is);
         System.out.println(parse.getMethod());
     }
 
@@ -60,16 +61,16 @@ public class SimpleHeaderParserTest {
     }
 
     @Test
-    public void testInit(){
+    public void testInit() {
         assertNotNull(parse);
     }
-    
+
     /**
      * Test of getMethod method, of class SimpleHeaderParser.
      */
     @Test
     public void testGetMethod() {
-        assertEquals("GET", parse.getMethod());
+        assertEquals("PUT", parse.getMethod());
     }
 
     /**
@@ -77,7 +78,7 @@ public class SimpleHeaderParserTest {
      */
     @Test
     public void testGetAuthorization() {
-        assertEquals("pass", parse.getAuthorization());
+        assertEquals("test", parse.getAuthorization());
     }
 
     /**
@@ -95,5 +96,12 @@ public class SimpleHeaderParserTest {
     public void testGetRoute() {
         assertEquals("/route", parse.getRoute());
     }
-
+    /**
+     * Test of getBody method, of class SimpleRequestParser.
+     */
+    @Test
+    public void testGetBody() {
+        assertEquals("tady pak hrozne body", parse.getBody());
+    }
+    
 }
