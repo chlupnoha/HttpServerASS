@@ -10,9 +10,11 @@
  */
 public enum HttpResponseType {
     _200_OK("200 OK"),
+    _201_CREATED("201 Created"),
     _401_UNAUTHRORIZED("401 Authorization Required"),
     _404_NOT_FOUND("404 Not Found"),
-    _415_UNSUPPORTED_MEDIA_TYPE("415 Unsupported Media Type");
+    _415_UNSUPPORTED_MEDIA_TYPE("415 Unsupported Media Type"),
+    _500_INTERNAL_SERVER_ERROR("500 Internal Server Error"),;
 
     private final String name;       
 

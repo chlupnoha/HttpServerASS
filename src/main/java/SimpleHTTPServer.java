@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class SimpleHTTPServer {
 
     public static final String WWW_DIR = "www";
+    public static final int POOL_SIZE = 100;
     private static ServerSocket server;
 
     public static void main(String args[])  {
@@ -31,7 +32,7 @@ public class SimpleHTTPServer {
         FileUtil.createFolder(WWW_DIR);
 
         //Create Thread poll
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < POOL_SIZE; i++) {
             Thread thread = new Thread() {
                 @Override
                 public void run() {

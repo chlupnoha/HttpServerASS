@@ -15,7 +15,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -93,7 +95,9 @@ public class FileUtilTest {
     @Test
     public void testCreateTxtFileAndDelete() {
         try {
-            FileUtil.createTxtFile("www", "try.txt");
+            FileUtil.createFile("www", "try.txt", "content");
+            assertTrue(true);
+            FileUtil.createFile("www", "test/zkouska.html", "HTML CONTENTTR".getBytes(StandardCharsets.UTF_8));
             assertTrue(true);
         } catch (UnsupportedEncodingException ex) {
             System.out.println(ex.getMessage());
@@ -105,6 +109,8 @@ public class FileUtilTest {
 
         try {
             FileUtil.deleteFile("www", "try.txt");
+            assertTrue(true);
+            FileUtil.deleteFile("www", "test/zkouska.html");
             assertTrue(true);
         } catch (UnsupportedEncodingException ex) {
             System.out.println(ex.getMessage());

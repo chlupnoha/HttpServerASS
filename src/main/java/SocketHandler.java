@@ -21,9 +21,10 @@ public class SocketHandler implements Runnable {
             case "GET":
                 new GetHandler().handle(exchanger);
                 break;
-            case "POST":
-                break;
             case "PUT":
+                new PutHandler().handle(exchanger);
+                break;
+            case "DELETE":
                 break;
         }
     }

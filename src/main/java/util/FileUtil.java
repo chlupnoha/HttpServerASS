@@ -3,9 +3,12 @@ package util;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,17 +33,26 @@ public class FileUtil {
         }
     }
 
-    public static void createTxtFile(String pathToFolder, String name) throws FileNotFoundException, UnsupportedEncodingException, Exception {
+//    public static void createFile(String pathWithName, String content) throws FileNotFoundException, UnsupportedEncodingException {
+//        PrintWriter writer = new PrintWriter(pathWithName, "UTF-8");
+//        writer.println(content);
+//        writer.close();
+//    }
+    public static void createFile(String pathToFolder, String name, String content) throws FileNotFoundException, UnsupportedEncodingException {
         String pathToFile = pathToFolder + "/" + name;
-        System.out.println("path: " + pathToFile);
-        File f = new File(pathToFile);
-        if (f.exists() && !f.isDirectory()) {
-            throw new Exception("File exist");
-        }
-
         PrintWriter writer = new PrintWriter(pathToFile, "UTF-8");
-        writer.println("content");
+        writer.println(content);
         writer.close();
+    }
+
+    public static void createFile(String pathToFolder, String name, byte[] content) throws FileNotFoundException, UnsupportedEncodingException, IOException {
+        String pathToFile = pathToFolder + "/" + name;
+        FileOutputStream stream = new FileOutputStream(pathToFile);
+        try {
+            stream.write(content);
+        } finally {
+            stream.close();
+        }
     }
 
     public static void deleteFile(String pathToFolder, String name) throws FileNotFoundException, UnsupportedEncodingException, Exception {

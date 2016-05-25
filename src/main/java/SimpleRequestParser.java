@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -15,6 +17,7 @@ public class SimpleRequestParser {
     private String route;
     private String url;
     private String body = "";
+    private byte[] byteBody;
 
     private final BufferedReader reader;
 
@@ -38,7 +41,12 @@ public class SimpleRequestParser {
         return body;
     }
 
+    public byte[] getByteBody() {
+        return byteBody;
+    }    
+    
     public SimpleRequestParser(InputStream is) throws IOException {
+//        setByteBody(is);
         reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
         parseRequest();
     }
@@ -70,7 +78,7 @@ public class SimpleRequestParser {
             }
             line = reader.readLine();
         }
-        
+                
         if (length > 0) {
             int ch;
             while ((ch = reader.read()) != -1) {
@@ -82,5 +90,14 @@ public class SimpleRequestParser {
         }
         //reader.close();
     }
+    
+//    private void setByteBody(InputStream is) throws IOException{
+//        byte[] bytes = IOUtils.toByteArray(is);
+//        //pokus o hledani 2 "\n"
+//        for(byte b : bytes){
+//            System.out.println("b: " + b);
+//        }
+//        System.out.println("\n".getBytes(StandardCharsets.UTF_8));
+//    }
 
 }
