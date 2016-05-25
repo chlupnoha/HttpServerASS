@@ -1,17 +1,20 @@
+package handlers;
 
+
+import server.HttpExchanger;
+import handlers.GetHandler;
 import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.util.Arrays;
 import util.ServerTime;
+import server.HttpResponseType;
 
 /**
  *
