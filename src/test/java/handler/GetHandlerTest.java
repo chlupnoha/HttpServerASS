@@ -45,7 +45,6 @@ public class GetHandlerTest {
 
     @AfterClass
     public static void tearDownClass() throws IOException {
-        SimpleHTTPServer.stopServer();
     }
 
     @Before

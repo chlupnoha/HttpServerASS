@@ -38,7 +38,6 @@ public class PutHandlerTest {
 
     @AfterClass
     public static void tearDownClass() throws IOException {
-        SimpleHTTPServer.stopServer();
     }
 
     @Before

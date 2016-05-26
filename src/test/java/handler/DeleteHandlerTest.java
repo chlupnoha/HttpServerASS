@@ -40,7 +40,6 @@ public class DeleteHandlerTest {
 
     @AfterClass
     public static void tearDownClass() throws IOException {
-        SimpleHTTPServer.stopServer();
     }
 
     @Before
