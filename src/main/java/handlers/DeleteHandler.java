@@ -23,8 +23,8 @@ public class DeleteHandler extends AbstractHttpHandler implements Handler {
     public void handle(HttpExchanger httpRequest) {
         String route = SimpleHTTPServer.WWW_DIR + httpRequest.getSimpleRequestParser().getRoute();
         try {
-            File file = FileCacheService.getInstance().getFileFromCach(route);
-//            File file = new File(route);
+//            File file = FileCacheService.getInstance().getFileFromCach(route);
+            File file = new File(route);
             String folder = file.getParentFile().getPath();
             
             if (FileUtil.checkHtaccess(folder)
@@ -36,6 +36,7 @@ public class DeleteHandler extends AbstractHttpHandler implements Handler {
             boolean b= file.delete();
             if(b){
                 sendResponse(HttpResponseType._204_NO_CONTENT, httpRequest);
+                FileCacheService.getInstance().refreshKey(route);
                 Logger.getLogger(DeleteHandler.class.getName()).log(Level.INFO, "Odpoved 204 odeslana, file na route: {0} byl smazan", folder);
             }else{
                 sendResponse(HttpResponseType._404_NOT_FOUND, httpRequest);
@@ -47,9 +48,6 @@ public class DeleteHandler extends AbstractHttpHandler implements Handler {
         } catch (IOException | NullPointerException ex) {
             sendResponse(HttpResponseType._404_NOT_FOUND, httpRequest);
             Logger.getLogger(DeleteHandler.class.getName()).log(Level.SEVERE, "File nenalezen");
-        } catch (ExecutionException ex) {
-            sendResponse(HttpResponseType._500_INTERNAL_SERVER_ERROR, httpRequest);
-            Logger.getLogger(DeleteHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

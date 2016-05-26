@@ -29,8 +29,8 @@ public class PutHandler extends AbstractHttpHandler implements Handler{
     public void handle(HttpExchanger httpRequest) {
         String route = SimpleHTTPServer.WWW_DIR + httpRequest.getSimpleRequestParser().getRoute();
         try {
-            File file = FileCacheService.getInstance().getFileFromCach(route);
-//            File file = new File(route);
+//            File file = FileCacheService.getInstance().getFileFromCach(route);
+            File file = new File(route);
             String folder = file.getParentFile().getPath();
             
             //htaccess for updating files in folder
@@ -43,6 +43,7 @@ public class PutHandler extends AbstractHttpHandler implements Handler{
             FileUtil.createFile(".", route, httpRequest.getSimpleRequestParser().getBody());
             
             sendResponse(HttpResponseType._201_CREATED, httpRequest);
+            FileCacheService.getInstance().refreshKey(route);
             Logger.getLogger(GetHandler.class.getName()).log(Level.INFO, "Odpoved 201 odeslana");
         } catch (FileNotFoundException ex) {
             sendResponse(HttpResponseType._404_NOT_FOUND, httpRequest);
@@ -50,9 +51,6 @@ public class PutHandler extends AbstractHttpHandler implements Handler{
         } catch (IOException | NullPointerException ex) {
             sendResponse(HttpResponseType._500_INTERNAL_SERVER_ERROR, httpRequest);
             Logger.getLogger(GetHandler.class.getName()).log(Level.SEVERE, "Internal server eror");
-        } catch (ExecutionException ex) {
-            sendResponse(HttpResponseType._500_INTERNAL_SERVER_ERROR, httpRequest);
-            Logger.getLogger(PutHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

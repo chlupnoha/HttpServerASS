@@ -46,4 +46,9 @@ public class FileCacheService {
     public synchronized File getFileFromCach(String path) throws ExecutionException {
         return fileCache.get(path);
     }
+    
+    public synchronized void refreshKey(String key){
+        fileCache.refresh(key);
+    }
+    
 }

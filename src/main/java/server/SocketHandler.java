@@ -13,7 +13,7 @@ import java.net.Socket;
  *
  * @author chlupnoha
  */
-public class SocketHandler implements Runnable {
+public class SocketHandler {
 
     //socket
     //server
@@ -36,11 +36,6 @@ public class SocketHandler implements Runnable {
             default:
                 break;
         }
-    }
-
-    @Override
-    public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
