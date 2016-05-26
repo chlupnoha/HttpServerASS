@@ -12,18 +12,20 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import util.SteamUtil;
 
 /**
  *
@@ -71,10 +73,11 @@ public class GetHandlerTest {
         int responseCode = con.getResponseCode();
         System.out.println("\nGet request URL: " + url);
 
-        String webContent = SteamUtil.convertStreamToString(con.getInputStream());
+//        String webContent = SteamUtil.convertStreamToString(con.getInputStream());
+        String webContent = IOUtils.toString(con.getInputStream(), "UTF-8"); 
         System.out.println("web content: " + webContent);
 
-        String fileContent = new String(Files.readAllBytes(Paths.get(SimpleHTTPServer.WWW_DIR + "/text.txt")));
+        String fileContent = new String(Files.readAllBytes(Paths.get(SimpleHTTPServer.WWW_DIR + "/text.txt")), StandardCharsets.UTF_8);
         System.out.println("fileContent: " + fileContent);
 
         assertTrue(responseCode == 200);
@@ -99,8 +102,8 @@ public class GetHandlerTest {
         int responseCode = con.getResponseCode();
         System.out.println("\nGet request URL: " + url);
 
-        String webContent = SteamUtil.convertStreamToString(con.getInputStream());
-        String fileContent = new String(Files.readAllBytes(Paths.get(SimpleHTTPServer.WWW_DIR + "/img.jpg")));
+        String webContent = IOUtils.toString(con.getInputStream(), "UTF-8"); 
+        String fileContent = new String(Files.readAllBytes(Paths.get(SimpleHTTPServer.WWW_DIR + "/img.jpg")), StandardCharsets.UTF_8);
 
         assertTrue(responseCode == 200);
         assertTrue(fileContent.equals(webContent));

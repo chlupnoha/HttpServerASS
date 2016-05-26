@@ -7,19 +7,19 @@ package util;
  */
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -58,12 +58,15 @@ public class FileUtilTest {
         File theDir = new File(name);
         assertTrue(theDir.exists());
         //clear
-        theDir.delete();
-        assertTrue(!theDir.exists());
+        boolean delete = theDir.delete();
+        assertTrue(delete);
+        //assertTrue(!theDir.exists());
     }
 
     /**
      * Test of createAuthorizationHtaccess method, of class FileUtil.
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void testCreateAuthorizationHtaccess() throws Exception {
@@ -74,10 +77,15 @@ public class FileUtilTest {
         File f = new File(webSecretFolder + "/.htaccess");
         assertTrue(f.exists() && !f.isDirectory());
 
-        BufferedReader br = new BufferedReader(new FileReader(f));
-        String line = br.readLine();
-        assertTrue(line.equals("user:cGFzc3dvcmQ="));
-        br.close();
+//        FileInputStream fileStream = new FileInputStream(f);
+//        InputStreamReader inputStream = new InputStreamReader(fileStream, "UTF-8");
+//        BufferedReader br = new BufferedReader(inputStream);
+//        String line = br.readLine();
+        String line =new String(Files.readAllBytes(Paths.get(webSecretFolder + "/.htaccess")), StandardCharsets.UTF_8);
+        System.out.println("line: " + line);
+//        String line = IOUtils.toString(fileStream, "UTF-8");
+
+        assertTrue(line.equals("user:cGFzc3dvcmQ=\n"));
     }
 
     /**

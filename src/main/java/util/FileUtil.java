@@ -25,8 +25,12 @@ public class FileUtil {
         // if the directory does not exist, create it
         if (!theDir.exists()) {
             try {
-                theDir.mkdir();
-                Logger.getLogger(FileUtil.class.getName()).log(Level.INFO, "FOLDER CREATED");
+                boolean b = theDir.mkdir();
+                if(b){
+                    Logger.getLogger(FileUtil.class.getName()).log(Level.INFO, "FOLDER CREATED");
+                }else{
+                    Logger.getLogger(FileUtil.class.getName()).log(Level.INFO, "CANT BE CREATED");
+                }
             } catch (SecurityException se) {
                 Logger.getLogger(FileUtil.class.getName()).log(Level.WARNING, "CANT CREATE FILE");
             }

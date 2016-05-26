@@ -1,6 +1,5 @@
 package server;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +18,6 @@ public class SimpleRequestParser {
     private String route;
     private String url;
     private String body = "";
-    private byte[] byteBody;
 
     private final BufferedReader reader;
 
@@ -43,10 +41,6 @@ public class SimpleRequestParser {
         return body;
     }
 
-    public byte[] getByteBody() {
-        return byteBody;
-    }    
-    
     public SimpleRequestParser(InputStream is) throws IOException {
 //        setByteBody(is);
         reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
@@ -77,10 +71,13 @@ public class SimpleRequestParser {
                 case "Content-Length:":
                     length = Integer.parseInt(e[1]);
                     break;
+                default:
+                    break;
+
             }
             line = reader.readLine();
         }
-                
+
         if (length > 0) {
             int ch;
             while ((ch = reader.read()) != -1) {
@@ -92,7 +89,7 @@ public class SimpleRequestParser {
         }
         //reader.close();
     }
-    
+
 //    private void setByteBody(InputStream is) throws IOException{
 //        byte[] bytes = IOUtils.toByteArray(is);
 //        //pokus o hledani 2 "\n"
@@ -101,5 +98,4 @@ public class SimpleRequestParser {
 //        }
 //        System.out.println("\n".getBytes(StandardCharsets.UTF_8));
 //    }
-
 }

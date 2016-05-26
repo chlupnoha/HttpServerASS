@@ -3,11 +3,11 @@ package server;
 
 
 
+import handlers.DeleteHandler;
 import handlers.GetHandler;
 import handlers.PutHandler;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Date;
 
 /**
  *
@@ -31,6 +31,9 @@ public class SocketHandler implements Runnable {
                 new PutHandler().handle(exchanger);
                 break;
             case "DELETE":
+                new DeleteHandler().handle(exchanger);
+                break;
+            default:
                 break;
         }
     }

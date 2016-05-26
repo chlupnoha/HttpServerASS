@@ -46,7 +46,7 @@ public class SimpleRequestParserTest {
                 + "Cookie: nette-browser=moif77badm; PHPSESSID=q6eo38pj0krd1neccnmn3pd4v4\r\n\r\n" 
                 + "tady pak hrozne body\n";
 
-        InputStream is = new ByteArrayInputStream(headerSample.getBytes());
+        InputStream is = new ByteArrayInputStream(headerSample.getBytes("UTF-8"));
         parse = new SimpleRequestParser(is);
         System.out.println(parse.getMethod());
     }
