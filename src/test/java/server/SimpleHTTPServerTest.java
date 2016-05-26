@@ -37,27 +37,27 @@ public class SimpleHTTPServerTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of main method, of class SimpleHTTPServer.
-     */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = {};
-        SimpleHTTPServer.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of stopServer method, of class SimpleHTTPServer.
-     */
-    @Test
-    public void testStopServer() throws Exception {
-        System.out.println("stopServer");
-        SimpleHTTPServer.stopServer();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    /**
+//     * Test of main method, of class SimpleHTTPServer.
+//     */
+//    @Test
+//    public void testMain() {
+//        System.out.println("main");
+//        String[] args = {};
+//        SimpleHTTPServer.main(args);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of stopServer method, of class SimpleHTTPServer.
+//     */
+//    @Test
+//    public void testStopServer() throws Exception {
+//        System.out.println("stopServer");
+//        SimpleHTTPServer.stopServer();
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
     
 }

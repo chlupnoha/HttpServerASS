@@ -1,6 +1,6 @@
 package util;
 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
+import java.util.Base64;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -77,7 +77,7 @@ public class FileUtil {
     //create htacess
     public static void createAuthorizationHtaccess(String pathToFolder, String user, String password) throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter(pathToFolder + "/.htaccess", "UTF-8");
-        String encodedPassword = Base64.encode(password.getBytes(StandardCharsets.UTF_8));
+        String encodedPassword = Base64.getEncoder().encodeToString(password.getBytes("UTF-8"));
         System.out.println(encodedPassword);
         writer.println(user + ":" + encodedPassword);
         writer.close();

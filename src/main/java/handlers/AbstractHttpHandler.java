@@ -1,23 +1,17 @@
 package handlers;
 
 import server.HttpExchanger;
-import handlers.GetHandler;
-import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import util.ServerTime;
 import server.HttpResponseType;
+import java.util.Base64;
 
 /**
  *
@@ -72,25 +66,25 @@ public abstract class AbstractHttpHandler {
         }
 
         String decodedUserPass;
-        try {
+//        try {
             String[] isBasic = authorization.split(" ");
             System.out.println(Arrays.toString(isBasic));
             if (isBasic.length != 2 || !isBasic[0].equals("Basic")) {
                 Logger.getLogger(GetHandler.class.getName()).log(Level.INFO, "No Basic in Authorization");
                 return false;
             }
-            decodedUserPass = new String(Base64.decode(isBasic[1]), StandardCharsets.UTF_8);
+            decodedUserPass = new String(Base64.getDecoder().decode(isBasic[1]), StandardCharsets.UTF_8);
             String[] userPass = decodedUserPass.split(":");
             if (userPass.length != 2) {
                 Logger.getLogger(GetHandler.class.getName()).log(Level.INFO, "No valid data user:base64(password)");
                 return false;
             }
-            decodedUserPass = userPass[0] + ":" + Base64.encode(userPass[1].getBytes(StandardCharsets.UTF_8)) + "\n";
+            decodedUserPass = userPass[0] + ":" + Base64.getEncoder().encodeToString(userPass[1].getBytes(StandardCharsets.UTF_8)) + "\n";
             Logger.getLogger(GetHandler.class.getName()).log(Level.INFO, "DECODED HEADER: {0}", decodedUserPass);
-        } catch (Base64DecodingException ex) {
-            Logger.getLogger(AbstractHttpHandler.class.getName()).log(Level.SEVERE, "Authorization cant be decoded.");
-            return false;
-        }
+//        } catch (Base64DecodingException ex) {
+//            Logger.getLogger(AbstractHttpHandler.class.getName()).log(Level.SEVERE, "Authorization cant be decoded.");
+//            return false;
+//        }
         return line.equals(decodedUserPass);
     }
 }
