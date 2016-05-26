@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- *
+ * Just server time for header
  * @author chlupnoha
  */
 public class ServerTime {

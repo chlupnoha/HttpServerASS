@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- *
+ * Parse stream from request
  * @author chlupnoha
  */
 public class SimpleRequestParser {

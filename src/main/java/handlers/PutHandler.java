@@ -7,7 +7,6 @@ import server.HttpExchanger;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.FileUtil;
@@ -16,7 +15,7 @@ import server.HttpResponseType;
 
 
 /**
- *
+ * Handle PUT method
  * @author chlupnoha
  */
 public class PutHandler extends AbstractHttpHandler implements Handler{

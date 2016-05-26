@@ -19,7 +19,7 @@ import util.FileUtil;
 import server.HttpResponseType;
 
 /**
- *
+ * Handle GET Method
  * @author chlupnoha
  */
 public class GetHandler extends AbstractHttpHandler implements Handler {
@@ -29,7 +29,6 @@ public class GetHandler extends AbstractHttpHandler implements Handler {
         String route = SimpleHTTPServer.WWW_DIR + httpRequest.getSimpleRequestParser().getRoute();
         try {
             File file = FileCacheService.getInstance().getFileFromCach(route);
-            //File file = new File(route);
             String folder = file.getParentFile().getPath();
             
             if (FileUtil.checkHtaccess(folder)
@@ -40,10 +39,7 @@ public class GetHandler extends AbstractHttpHandler implements Handler {
 
             Path p = Paths.get(route);
             String contentType = Files.probeContentType(p);
-//            FileInputStream fis = new FileInputStream(file);
             byte[] data = Files.readAllBytes(p);
-//            fis.read(data);
-//            fis.close();
 
             sendResponse(HttpResponseType._200_OK, data, contentType, httpRequest);
             Logger.getLogger(GetHandler.class.getName()).log(Level.INFO, "Odpoved 200 odeslana, route: {0}", folder);

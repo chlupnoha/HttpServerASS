@@ -14,7 +14,7 @@ import server.HttpResponseType;
 import java.util.Base64;
 
 /**
- *
+ * Abstract Handler for common operations in all Handlers
  * @author chlupnoha
  */
 public abstract class AbstractHttpHandler {

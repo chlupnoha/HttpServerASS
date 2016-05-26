@@ -7,14 +7,13 @@ import server.SimpleHTTPServer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.FileUtil;
 import server.HttpResponseType;
 
 /**
- *
+ * Handle DELETE Method
  * @author chlupnoha
  */
 public class DeleteHandler extends AbstractHttpHandler implements Handler {
@@ -23,7 +22,6 @@ public class DeleteHandler extends AbstractHttpHandler implements Handler {
     public void handle(HttpExchanger httpRequest) {
         String route = SimpleHTTPServer.WWW_DIR + httpRequest.getSimpleRequestParser().getRoute();
         try {
-//            File file = FileCacheService.getInstance().getFileFromCach(route);
             File file = new File(route);
             String folder = file.getParentFile().getPath();
             

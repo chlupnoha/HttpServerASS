@@ -9,11 +9,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * 
- * 
- * Guided by:
+ * Insperation by:
  * http://javarevisited.blogspot.com/2015/06/how-to-create-http-server-in-java-serversocket-example.html#ixzz49b6d5WqE
  *
+ * Basic HttpServer runs on:
+ * http://localhost:8080
+ * 
+ * Can handle GET, PUT and DELETE
+ * 
  * @author chlupnoha
  */
 public class SimpleHTTPServer {

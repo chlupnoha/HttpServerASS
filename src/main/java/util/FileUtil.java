@@ -7,12 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Common utils for server service
  * idea:
  * http://stackoverflow.com/questions/3634853/how-to-create-a-directory-in-java
  *

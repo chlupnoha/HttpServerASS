@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
- *
+ * Handling request based on header
  * @author chlupnoha
  */
 public class SocketHandler {
