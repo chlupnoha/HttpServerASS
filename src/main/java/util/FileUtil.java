@@ -76,11 +76,23 @@ public class FileUtil {
 
     //create htacess
     public static void createAuthorizationHtaccess(String pathToFolder, String user, String password) throws FileNotFoundException, UnsupportedEncodingException {
-        PrintWriter writer = new PrintWriter(pathToFolder + "/.htaccess", "UTF-8");
         String encodedPassword = Base64.getEncoder().encodeToString(password.getBytes("UTF-8"));
-        System.out.println(encodedPassword);
-        writer.println(user + ":" + encodedPassword);
-        writer.close();
+        createFile(pathToFolder, "/.htaccess", user + ":" + encodedPassword);
+//        PrintWriter writer = new PrintWriter(pathToFolder + "/.htaccess", "UTF-8");
+//        System.out.println(encodedPassword);
+//        writer.println(user + ":" + encodedPassword);
+//        writer.close();
+        
+//        String pathToFile =pathToFolder + "/.htaccess";
+//        FileOutputStream stream = new FileOutputStream(pathToFile);
+//        String encodedPassword = Base64.getEncoder().encodeToString(password.getBytes("UTF-8"));
+//        System.out.println(encodedPassword);
+//        //writer.println(user + ":" + encodedPassword);
+//        try {
+//            stream.write(user + ":" + encodedPassword);
+//        } finally {
+//            stream.close();
+//        }
     }
 
     public static boolean checkHtaccess(String folder) {
