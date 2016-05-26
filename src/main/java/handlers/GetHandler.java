@@ -1,6 +1,7 @@
 package handlers;
 
 
+import cache.FileCacheService;
 import server.HttpExchanger;
 import server.SimpleHTTPServer;
 import handlers.Handler;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.FileUtil;
@@ -26,7 +28,8 @@ public class GetHandler extends AbstractHttpHandler implements Handler {
     public void handle(HttpExchanger httpRequest) {
         String route = SimpleHTTPServer.WWW_DIR + httpRequest.getSimpleRequestParser().getRoute();
         try {
-            File file = new File(route);
+            File file = FileCacheService.getInstance().getFileFromCach(route);
+            //File file = new File(route);
             String folder = file.getParentFile().getPath();
             
             if (FileUtil.checkHtaccess(folder)
@@ -50,6 +53,9 @@ public class GetHandler extends AbstractHttpHandler implements Handler {
         } catch (IOException | NullPointerException ex) {
             sendResponse(HttpResponseType._404_NOT_FOUND, httpRequest);
             Logger.getLogger(GetHandler.class.getName()).log(Level.SEVERE, "File nenalezen");
+        } catch (ExecutionException ex) {
+            sendResponse(HttpResponseType._500_INTERNAL_SERVER_ERROR, httpRequest);
+            Logger.getLogger(GetHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

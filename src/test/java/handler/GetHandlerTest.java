@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import util.FileUtil;
 
 /**
  *
@@ -63,6 +64,8 @@ public class GetHandlerTest {
      */
     @Test
     public void testHandleOK() throws MalformedURLException, ProtocolException, IOException {
+        FileUtil.createFile(SimpleHTTPServer.WWW_DIR, "text.txt", "content");
+        
         String url = "http://localhost:8080/text.txt";
 
         URL obj = new URL(url);

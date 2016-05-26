@@ -138,9 +138,9 @@ public class DeleteHandlerTest {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-                .url("http://localhost:8080/text.txt")
+                .url("http://localhost:8080/secret/delete.txt")
                 .delete(null)
-                .addHeader("authorization", "Basic dXNlcjpwYXNzd29yZA==")
+                .addHeader("Authorization", "Basic dXNlcjpwYXNzd29yZA==")
                 .addHeader("token", "ok2ffe9qubnk9dpmxgju5jlupmp6poijrxcw9zh99ttvsr5x7u")
                 .addHeader("cache-control", "no-cache")
                 .addHeader("postman-token", "d1f26ec6-3ebf-283b-8421-428196612ab5")
@@ -151,7 +151,7 @@ public class DeleteHandlerTest {
         assertTrue(response.code() == 204);
 
         File file = new File(SimpleHTTPServer.WWW_DIR + "/secret/delete.txt");
-        assertTrue(file.exists());
+        assertTrue(!file.exists());
     }
 
 }

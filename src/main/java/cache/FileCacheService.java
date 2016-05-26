@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Create sipmle Cache service for save/load files insperation:
+ * Create Cache service for save/load files insperation:
  * http://www.tutorialspoint.com/guava/guava_caching_utilities.htm
  *
  * @author chlupnoha
@@ -40,15 +40,10 @@ public class FileCacheService {
 
     private synchronized File getFile(String path) throws ExecutionException, ExecutionException, ExecutionException {
         File file = new File(path);
-        if (file.exists()) {
-            return file;
-        } else {
-            return null;
-        }
+        return file;
     }
     
     public synchronized File getFileFromCach(String path) throws ExecutionException {
-        File f = fileCache.get(path);
-        return f;
+        return fileCache.get(path);
     }
 }
