@@ -85,15 +85,6 @@ public class SimpleRequestParser {
                 }
             }
         }
-        //reader.close();
+        //cant handle binary content
     }
-
-//    private void setByteBody(InputStream is) throws IOException{
-//        byte[] bytes = IOUtils.toByteArray(is);
-//        //pokus o hledani 2 "\n"
-//        for(byte b : bytes){
-//            System.out.println("b: " + b);
-//        }
-//        System.out.println("\n".getBytes(StandardCharsets.UTF_8));
-//    }
 }

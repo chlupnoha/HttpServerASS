@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class SimpleHTTPServer {
 
     public static final String WWW_DIR = "www";
-    public static final int POOL_SIZE = 100;
+    public static final int POOL_SIZE = 1;
     private static ServerSocket server;
 
     public static void main(String args[])  {

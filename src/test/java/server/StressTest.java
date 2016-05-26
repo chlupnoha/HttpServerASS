@@ -1,7 +1,6 @@
 package server;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import okhttp3.OkHttpClient;
@@ -10,7 +9,6 @@ import okhttp3.Response;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static server.SimpleHTTPServer.POOL_SIZE;
 
 /**
  * source: http://hc.apache.org/httpclient-3.x/threading.html
@@ -48,7 +46,7 @@ public class StressTest {
         for (int i = 0; i < 100; i++) {
             Thread thread = new Thread() {
                 @Override
-                public void run() {
+                public void run() {//dunno whats findBugs problem
                     try {
                         Response response = client.newCall(request).execute();
                         Assert.assertTrue(response.code() == 200);
@@ -63,4 +61,6 @@ public class StressTest {
         }
 
     }
+    
 }
+
